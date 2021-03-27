@@ -30,6 +30,15 @@ const Home: React.FC = () => {
             >
               Form Cadastro
             </Button>
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={() => {
+                history.push('/pet/register')
+              }}
+            >
+              Pet Register
+            </Button>
       </Container>
   );
 }
