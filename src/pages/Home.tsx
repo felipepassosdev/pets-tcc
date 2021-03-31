@@ -1,7 +1,6 @@
 import { Button, Card, Container } from '@material-ui/core';
 import React from 'react';
 import { useHistory } from 'react-router';
-import CardComponent from '../components/CardComponent';
 
 // import { Container } from './styles';
 
@@ -9,9 +8,6 @@ const Home: React.FC = () => {
   let history = useHistory();
   return (
       <Container>
-          <CardComponent>
-              
-          </CardComponent>
           <Button
               variant="outlined"
               color="primary"
