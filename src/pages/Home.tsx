@@ -2,12 +2,12 @@ import { Button, Card, Container, Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import axios from "axios";
-import PetCard from "../components/PetCard";
+import PetCard from "../components/PetCard/PetCard";
 import api from "../services/api";
 
 // import { Container } from './styles';
 
-const Home: React.FC = () => {
+const Home = () => {
   let history = useHistory();
   const [pets, setPets] = useState<Array<any>>();
   async function getGames() {
