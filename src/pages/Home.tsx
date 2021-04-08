@@ -51,7 +51,7 @@ const Home: React.FC = () => {
             Pet Register
           </Button>
         </Grid>
-        <Grid item xs={12} sm={8}>
+        <Grid item xs={12} sm={4}>
           {pets &&
             pets.map((pet) => {
               return <PetCard petInfo={pet} />;
