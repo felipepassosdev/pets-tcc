@@ -1,7 +1,7 @@
 import { Box, createStyles, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
 import { Link } from "react-router-dom";
-import { PetCardStyle } from './PetCard/PetCard.style';
+import { PetCardStyle } from './PetCard.style';
 
 export default function PetCard({ ...props }) {
   const pet = props.petInfo;
@@ -10,22 +10,6 @@ export default function PetCard({ ...props }) {
     petImage = "https://via.placeholder.com/720c";
   }
 
-  const useStyles = makeStyles(() =>
-    createStyles({
-        PetCard:{
-            overflow: "hidden"
-        },
-        PetCardA: {
-            textDecoration: 'none',
-        },
-        ImagePet:{
-            width:'100%',
-            objectFit:'cover',
-            maxHeight:'150px'
-        }
-
-    })
-  );
   const { PetCard, PetCardA, ImagePet } = PetCardStyle();
   return (
     <Box className={PetCard} boxShadow={5} borderRadius={5} my={2}>
