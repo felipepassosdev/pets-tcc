@@ -10,13 +10,27 @@ import {
   Typography,
 } from "@material-ui/core";
 import { useHistory } from "react-router";
+import api from "../../services/api";
 
 function Register() {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
   const [termos, setTermos] = useState(false);
   let history = useHistory();
+  const HandleRegister = () => {
+    api.post('/users/signup',{
+      email : email,
+      password: password,
+      password_confirmation : passwordConfirm,
+    }).then((res)=>{
+      console.log(res.data); // Token
+      history.push("/");
+    }).catch((err) => {
+      console.error("ops! ocorreu um erro" + err);
+    });
+  }
   return (
     <Container>
       <Grid container spacing={3}>
@@ -43,9 +57,7 @@ function Register() {
           <form
             onSubmit={(event) => {
               event.preventDefault();
-              alert(
-                `Cadastro DEBUG: email: "${email}", senha: "${password}", Nome: "${nome}",Temos Aceite "${termos}"`
-              );
+              HandleRegister();
             }}
           >
             <TextField
@@ -83,6 +95,19 @@ function Register() {
               value={password}
               onChange={(event) => {
                 setPassword(event.target.value);
+              }}
+            />
+            <TextField
+              required
+              id="Password"
+              label="Confirme sua senha"
+              type="password"
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              value={passwordConfirm}
+              onChange={(event) => {
+                setPasswordConfirm(event.target.value);
               }}
             />
             <FormControlLabel

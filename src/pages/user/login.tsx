@@ -8,11 +8,24 @@ import {
   Typography,
 } from "@material-ui/core";
 import { useHistory } from "react-router";
+import api from "../../services/api";
 
 function Login() {
   let history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const HandleLogin= () => {
+
+    api.post('/users/login',{
+      email : email,
+      password: password,
+    }).then((res)=>{
+      console.log(res.data); // Token
+      history.push("/");
+    }).catch((err) => {
+      console.error("ops! ocorreu um erro" + err);
+    });
+  }
   return (
     <Container>
       <Grid container spacing={3}>
@@ -24,7 +37,7 @@ function Login() {
           <form
             onSubmit={(event) => {
               event.preventDefault();
-              alert(`Login DEBUG: email: "${email}", senha: "${password}"`);
+              HandleLogin();
             }}
           >
             <TextField
