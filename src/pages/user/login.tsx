@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {setUserToken} from '../../services/token'
 import {
   Button,
   Container,
@@ -20,7 +21,8 @@ function Login() {
       email : email,
       password: password,
     }).then((res)=>{
-      console.log(res.data); // Token
+      //console.log(res.data); // Token
+      setUserToken(res.data);
       history.push("/");
     }).catch((err) => {
       console.error("ops! ocorreu um erro" + err);

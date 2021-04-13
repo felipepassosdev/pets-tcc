@@ -1,5 +1,8 @@
 import { Button, TextField, Container } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
+import api from '../../services/api';
+import { getUserToken } from '../../services/token';
 
 // import { Container } from './styles';
 
@@ -15,12 +18,43 @@ function Register() {
   const [cidade, setCidade] = useState("");
   const [status2, setStatus2] = useState("");
   const [token, setToken] = useState("");
+  let history = useHistory();
+  const HandleRegister = () => {
+    api.post('/pets',{
+      name : nome,
+      species : especie,
+      sex : sexo,
+      breed: raca,
+      color : cor,
+      image: image,
+      details: detalhes,
+      city: cidade,
+      state: estado,
+      status: status2,
+      active: true,
+      token : token,
 
+    }).then((res)=>{
+      //console.log(res.data); // Token
+      alert(`Pet ${nome} criado com sucesso`);
+      setTimeout(() => {
+        history.push("/");
+      }, 1000);
+    }).catch((err) => {
+      console.error("ops! ocorreu um erro" + err);
+    });
+  }
+
+  useEffect(() => {
+    let tokenResponse = getUserToken();
+    setToken(tokenResponse);
+  }, [])
   return (
     <Container>
       <form
         onSubmit={(event) => {
-        event.preventDefault()
+          event.preventDefault();
+          HandleRegister();
       }}>
           <TextField value={nome}
           onChange={(event) => {
@@ -30,12 +64,12 @@ function Register() {
           <TextField value={especie}
           onChange={(event) => {
             setEspecie(event.target.value);
-          }} id="especie" label="especie" type="text" 
+          }} id="especie" label="especie (cat/dog)" type="text" 
             variant="outlined" margin="normal" fullWidth/>
           <TextField value={sexo}
           onChange={(event) => {
             setSexo(event.target.value);
-          }} id="sexo" label="sexo" type="text" 
+          }} id="sexo" label="sexo (female/male)" type="text" 
             variant="outlined" margin="normal" />
           <TextField value={raca}
           onChange={(event) => {
@@ -70,7 +104,7 @@ function Register() {
           <TextField value={status2}
           onChange={(event) => {
             setStatus2(event.target.value);
-          }} id="status2" label="status2" type="text" 
+          }} id="status2" label="status2 (found/lost)" type="text" 
             variant="outlined" margin="normal"/>
           <TextField value={token}
           onChange={(event) => {
