@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import { useHistory } from "react-router";
 import api from "../../services/api";
+import { setUserToken } from "../../services/token";
 
 function Register() {
   const [nome, setNome] = useState("");
@@ -25,7 +26,8 @@ function Register() {
       password: password,
       password_confirmation : passwordConfirm,
     }).then((res)=>{
-      console.log(res.data); // Token
+      //console.log(res.data); // Token
+      setUserToken(res.data);
       history.push("/");
     }).catch((err) => {
       console.error("ops! ocorreu um erro" + err);
