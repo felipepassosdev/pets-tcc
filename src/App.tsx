@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import Login from './pages/user/login';
 import Register from './pages/user/register';
 import PetRegister from './pages/pet/register';
-import Menu from './components/Menu';
+import Menu from './components/Menu/Menu';
 const App: React.FC = () => {
   return (
     <>
