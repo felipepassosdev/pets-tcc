@@ -10,14 +10,14 @@ import api from "../services/api";
 const Home = () => {
   let history = useHistory();
   const [pets, setPets] = useState<Array<any>>();
-  async function getGames() {
+  async function getPets() {
     api.get("pets").then((res) => {
       setPets(res.data);
       console.log(res.data);
     });
   }
   useEffect(() => {
-    getGames();
+    getPets();
   }, []);
   return (
     <Container>

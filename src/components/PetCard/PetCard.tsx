@@ -13,7 +13,7 @@ export default function PetCard({ ...props }) {
   const { PetCard, PetCardA, ImagePet } = PetCardStyle();
   return (
     <Box className={PetCard} boxShadow={5} borderRadius={5} my={2}>
-      <Link to="/" title={pet.species} className={PetCardA}>
+      <Link to={"/pet-details/"+pet.species+"&"+pet.name+"&"+pet.id} title={pet.species} className={PetCardA}>
         <img className={ImagePet} src={petImage} alt={pet.species} />
         <Box mx={1} pb={1}>
             <Typography variant="h6" >{pet.name}</Typography>
