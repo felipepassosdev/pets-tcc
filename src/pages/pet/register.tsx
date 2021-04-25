@@ -1,4 +1,4 @@
-import { Button, TextField, Container } from '@material-ui/core';
+import { Button, TextField, Container, Select, MenuItem, FormControl, InputLabel } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import api from '../../services/api';
@@ -61,16 +61,34 @@ function Register() {
             setNome(event.target.value);
           }} id="Nomedopet" label="Nome do pet" type="text"
             variant="outlined" margin="normal" />
-          <TextField value={especie}
-          onChange={(event) => {
-            setEspecie(event.target.value);
-          }} id="especie" label="especie (cat/dog)" type="text" 
-            variant="outlined" margin="normal" fullWidth/>
-          <TextField value={sexo}
-          onChange={(event) => {
-            setSexo(event.target.value);
-          }} id="sexo" label="sexo (female/male)" type="text" 
-            variant="outlined" margin="normal" />
+          <FormControl margin="dense" fullWidth variant="outlined">
+            <InputLabel>Especie</InputLabel>
+            <Select
+            label="Especie"
+            value={especie}
+            onChange={(event: React.ChangeEvent<{ value: unknown }>) => {
+              setEspecie(event.target.value as string);
+            }}
+            >
+              <MenuItem value={"dog"}>Cachorro</MenuItem>
+              <MenuItem value={"cat"}>Gato</MenuItem>
+            </Select>
+          </FormControl>
+
+          <FormControl margin="dense" fullWidth variant="outlined">
+            <InputLabel>Sexo</InputLabel>
+            <Select
+            label="Sexo"
+            value={sexo}
+            onChange={(event: React.ChangeEvent<{ value: unknown }>) => {
+              setSexo(event.target.value as string);
+            }}
+            >
+              <MenuItem value={"female"}>Femea</MenuItem>
+              <MenuItem value={"male"}>Macho</MenuItem>
+            </Select>
+          </FormControl>
+
           <TextField value={raca}
           onChange={(event) => {
             setRaca(event.target.value);
@@ -91,21 +109,69 @@ function Register() {
             setDetalhes(event.target.value);
           }} id="detalhes" label="detalhes" type="text" 
             variant="outlined" margin="normal" fullWidth/>
-          <TextField value={estado}
-          onChange={(event) => {
-            setEstado(event.target.value);
-          }} id="estado" label="estado" type="text" 
-            variant="outlined" margin="normal"/>
+
+          <FormControl margin="dense" fullWidth variant="outlined">
+            <InputLabel>Estado</InputLabel>
+            <Select
+            label="Estado"
+            value={estado}
+            onChange={(event: React.ChangeEvent<{ value: unknown }>) => {
+              setEstado(event.target.value as string);
+            }}
+            >
+              <MenuItem value={"Acre"}> Acre </MenuItem>
+              <MenuItem value={"Alagoas"}> Alagoas </MenuItem>
+              <MenuItem value={"Amapá"}> Amapá </MenuItem>
+              <MenuItem value={"Amazonas"}> Amazonas </MenuItem>
+              <MenuItem value={"Bahia"}> Bahia </MenuItem>
+              <MenuItem value={"Ceará"}> Ceará </MenuItem>
+              <MenuItem value={"Distrito Federal"}> Distrito Federal </MenuItem>
+              <MenuItem value={"Espírito Santo"}> Espírito Santo </MenuItem>
+              <MenuItem value={"Goiás"}> Goiás </MenuItem>
+              <MenuItem value={"Maranhão"}> Maranhão </MenuItem>
+              <MenuItem value={"Mato Grosso"}> Mato Grosso </MenuItem>
+              <MenuItem value={"Mato Grosso do Sul"}> Mato Grosso do Sul </MenuItem>
+              <MenuItem value={"Minas Gerais"}> Minas Gerais </MenuItem>
+              <MenuItem value={"Pará"}> Pará </MenuItem>
+              <MenuItem value={"Paraíba"}> Paraíba </MenuItem>
+              <MenuItem value={"Paraná"}> Paraná </MenuItem>
+              <MenuItem value={"Pernambuco"}> Pernambuco </MenuItem>
+              <MenuItem value={"Piauí"}> Piauí </MenuItem>
+              <MenuItem value={"Rio de Janeiro"}> Rio de Janeiro </MenuItem>
+              <MenuItem value={"Rio Grande do Norte"}> Rio Grande do Norte </MenuItem>
+              <MenuItem value={"Rio Grande do Sul"}> Rio Grande do Sul </MenuItem>
+              <MenuItem value={"Rondônia"}> Rondônia </MenuItem>
+              <MenuItem value={"Roraima"}> Roraima </MenuItem>
+              <MenuItem value={"Santa Catarina"}> Santa Catarina </MenuItem>
+              <MenuItem value={"São Paulo"}> São Paulo </MenuItem>
+              <MenuItem value={"Sergipe"}> Sergipe </MenuItem>
+              <MenuItem value={"Tocantins"}> Tocantins </MenuItem>
+            </Select>
+          </FormControl>
+
+
+
           <TextField value={cidade}
           onChange={(event) => {
             setCidade(event.target.value);
           }} id="Cidade" label="Cidade" type="text" 
             variant="outlined" margin="normal" fullWidth/>
-          <TextField value={status2}
-          onChange={(event) => {
-            setStatus2(event.target.value);
-          }} id="status2" label="status2 (found/lost)" type="text" 
-            variant="outlined" margin="normal"/>
+
+          <FormControl margin="dense" fullWidth variant="outlined">
+            <InputLabel>Status</InputLabel>
+            <Select
+            label="Status"
+            value={status2}
+            onChange={(event: React.ChangeEvent<{ value: unknown }>) => {
+              setStatus2(event.target.value as string);
+            }}
+            >
+            <MenuItem value={"found"}>Perdido</MenuItem>
+            <MenuItem value={"lost"}>Encontrado</MenuItem>
+            </Select>
+          </FormControl>
+
+
           <TextField value={token}
           onChange={(event) => {
             setToken(event.target.value);
