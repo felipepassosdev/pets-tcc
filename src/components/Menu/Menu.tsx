@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-import { Container, MenuItem } from "@material-ui/core";
+import { Box, Container, MenuItem } from "@material-ui/core";
 import { MenuStyle } from "./Menu.style";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
@@ -35,9 +35,10 @@ export default function Menu() {
 
 
   return (
-    <Container>
+    <Box>
       <div className={root}>
         <AppBar position="static">
+          
           <Toolbar>
             <IconButton
               edge="start"
@@ -70,6 +71,6 @@ export default function Menu() {
           </Toolbar>
         </AppBar>
       </div>
-    </Container>
+    </Box>
   );
 }

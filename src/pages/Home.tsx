@@ -4,12 +4,14 @@ import { useHistory } from "react-router";
 import axios from "axios";
 import PetCard from "../components/PetCard/PetCard";
 import api from "../services/api";
+import { getUserToken } from "../services/token";
 
 // import { Container } from './styles';
 
 const Home = () => {
   let history = useHistory();
   const [pets, setPets] = useState<Array<any>>();
+  const [token, setToken] = useState(Boolean);
   async function getPets() {
     api.get("pets").then((res) => {
       setPets(res.data);
@@ -18,20 +20,29 @@ const Home = () => {
   }
   useEffect(() => {
     getPets();
+    let tokenResponse = getUserToken();
+    if (tokenResponse != "") {
+      setToken(true);
+    } else {
+      setToken(false);
+    }
   }, []);
+
+  const registerPetButton = <Button
+  variant="outlined"
+  color="primary"
+  onClick={() => {
+    history.push("/pet/register");
+  }}
+>
+  Pet Register
+</Button>
   return (
     <Container>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={4}>
-          <Button
-            variant="outlined"
-            color="primary"
-            onClick={() => {
-              history.push("/pet/register");
-            }}
-          >
-            Pet Register
-          </Button>
+          {token && registerPetButton}
+
         </Grid>
         <Grid item xs={12} sm={8}>
           <Grid container spacing={3}>
