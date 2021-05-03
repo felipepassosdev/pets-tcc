@@ -27,35 +27,19 @@ const Home = () => {
             variant="outlined"
             color="primary"
             onClick={() => {
-              history.push("/login");
-            }}
-          >
-            Form Login
-          </Button>
-          <Button
-            variant="outlined"
-            color="primary"
-            onClick={() => {
-              history.push("/login");
-            }}
-          >
-            Form Cadastro
-          </Button>
-          <Button
-            variant="outlined"
-            color="primary"
-            onClick={() => {
               history.push("/pet/register");
             }}
           >
             Pet Register
           </Button>
         </Grid>
-        <Grid item xs={12} sm={4}>
-          {pets &&
-            pets.map((pet) => {
-              return <PetCard petInfo={pet} />;
+        <Grid item xs={12} sm={8}>
+          <Grid container spacing={3}>
+            {pets &&
+              pets.map((pet) => {
+                return <PetCard petInfo={pet} />;
             })}
+          </Grid>
         </Grid>
       </Grid>
     </Container>

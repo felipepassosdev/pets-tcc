@@ -10,10 +10,13 @@ export const getUserToken = ():string =>{
     }
 }
 export const setUserToken = (token:string) =>{
-    if(token != null){
+    if(token != null ){
         sessionStorage.setItem("userToken",token);
     }else{
         console.error("Token Invalido");
     }
 }
 
+export const expireUserToken = () =>{
+    sessionStorage.setItem("userToken","");
+}
