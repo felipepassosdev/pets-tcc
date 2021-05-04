@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import api from '../../services/api';
 import { getUserToken } from '../../services/token';
+import {cachorro,gato} from '../../services/racas';
 
 // import { Container } from './styles';
 
@@ -18,6 +19,7 @@ function Register() {
   const [cidade, setCidade] = useState("");
   const [status2, setStatus2] = useState("");
   const [token, setToken] = useState("");
+  const [racaSelect,setRacaSelect]=useState([]) as any;
   let history = useHistory();
   const HandleRegister = () => {
     api.post('/pets',{
@@ -49,6 +51,16 @@ function Register() {
     let tokenResponse = getUserToken();
     setToken(tokenResponse);
   }, [])
+
+  useEffect(() => {
+    if (especie == "dog") {
+      setRacaSelect(cachorro);
+    }else{
+      setRacaSelect(gato);
+    }
+  }, [especie])
+
+
   return (
     <Container>
       <form
@@ -89,11 +101,24 @@ function Register() {
             </Select>
           </FormControl>
 
-          <TextField value={raca}
-          onChange={(event) => {
-            setRaca(event.target.value);
-          }} id="raca" label="raca" type="text"
-            variant="outlined" margin="normal"/>
+          <FormControl margin="dense" fullWidth variant="outlined">
+            <InputLabel>Raça</InputLabel>
+              <Select
+              label="Raça"
+              value={raca}
+              onChange={(event: React.ChangeEvent<{ value: unknown }>) => {
+                setRaca(event.target.value as string);
+              }}
+              >
+               
+                {racaSelect &&
+                   racaSelect.map((racadopet:any)=>{
+                    return <MenuItem value={racadopet}> {racadopet} </MenuItem>
+                   })
+                }
+              </Select>
+          </FormControl>
+
           <TextField value={cor}
           onChange={(event) => {
             setCor(event.target.value);

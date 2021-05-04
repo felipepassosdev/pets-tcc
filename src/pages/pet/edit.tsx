@@ -4,6 +4,7 @@ import { useHistory } from 'react-router';
 import api from '../../services/api';
 import { getUserToken } from '../../services/token';
 import { useParams } from "react-router";
+import {cachorro,gato} from '../../services/racas';
 // import { Container } from './styles';
 
 function Edit() {
@@ -20,6 +21,7 @@ function Edit() {
   const [status, setStatus] = useState("");
   const [token, setToken] = useState("");
   let history = useHistory();
+  const [racaSelect,setRacaSelect]=useState(cachorro) as any;
 
   async function getPets() {
     api.get(`pets/${petId}`).then((res) => {
@@ -73,6 +75,16 @@ function Edit() {
     let tokenResponse = getUserToken();
     setToken(tokenResponse);
   }, [])
+
+  useEffect(() => {
+    if (especie == "dog") {
+      setRacaSelect(cachorro);
+    }else{
+      setRacaSelect(gato);
+    }
+  }, [especie])
+
+
   return (
     <Container>
       <form
@@ -113,11 +125,24 @@ function Edit() {
             </Select>
           </FormControl>
 
-          <TextField value={raca}
-          onChange={(event) => {
-            setRaca(event.target.value);
-          }} id="raca" label="raca" type="text"
-            variant="outlined" margin="normal"/>
+          <FormControl margin="dense" fullWidth variant="outlined">
+            <InputLabel>Raça</InputLabel>
+              <Select
+              label="Raça"
+              value={raca}
+              onChange={(event: React.ChangeEvent<{ value: unknown }>) => {
+                setRaca(event.target.value as string);
+              }}
+              >
+               
+                {racaSelect &&
+                   racaSelect.map((racadopet:any)=>{
+                    return <MenuItem value={racadopet}> {racadopet} </MenuItem>
+                   })
+                }
+              </Select>
+          </FormControl>
+
           <TextField value={cor}
           onChange={(event) => {
             setCor(event.target.value);
