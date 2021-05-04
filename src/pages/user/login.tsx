@@ -24,6 +24,7 @@ function Login() {
       //console.log(res.data); // Token
       setUserToken(res.data);
       history.push("/");
+      window.location.reload(false);
     }).catch((err) => {
       console.error("ops! ocorreu um erro" + err);
     });

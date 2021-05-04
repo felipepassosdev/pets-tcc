@@ -1,7 +1,9 @@
 import { makeStyles } from '@material-ui/core/styles';
 export const PetCardStyle = makeStyles(() => ({
     PetCard:{
-        overflow: "hidden"
+        overflow: "hidden",
+        width:"45%",
+        margin:"1rem"
     },
     PetCardA: {
         textDecoration: 'none',

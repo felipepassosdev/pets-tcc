@@ -3,11 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import api from '../../services/api';
 import { getUserToken } from '../../services/token';
+import { useParams } from "react-router";
 import {cachorro,gato} from '../../services/racas';
-
 // import { Container } from './styles';
 
-function Register() {
+function Edit() {
+  let { petId } = useParams<Record<string, string>>();
   const [nome, setNome] = useState("");
   const [especie, setEspecie] = useState("");
   const [sexo, setSexo] = useState("");
@@ -17,12 +18,34 @@ function Register() {
   const [detalhes, setDetalhes] = useState("");
   const [estado, setEstado] = useState("");
   const [cidade, setCidade] = useState("");
-  const [status2, setStatus2] = useState("");
+  const [status, setStatus] = useState("");
   const [token, setToken] = useState("");
-  const [racaSelect,setRacaSelect]=useState([]) as any;
   let history = useHistory();
-  const HandleRegister = () => {
-    api.post('/pets',{
+  const [racaSelect,setRacaSelect]=useState(cachorro) as any;
+
+  async function getPets() {
+    api.get(`pets/${petId}`).then((res) => {
+      const pets = res.data;
+      console.log(pets);
+      setNome(pets.name);
+      setEspecie(pets.species);
+      setSexo(pets.sex);
+      setRaca(pets.breed);
+      setCor(pets.color);
+      setImage(pets.image);
+      setImage(pets.image);
+      setDetalhes(pets.details);
+      setEstado(pets.state);
+      setCidade(pets.city);
+      setStatus(pets.status);
+    });
+  }
+  useEffect(() => {
+    getPets();
+  }, []);
+
+  const HandleEdit = () => {
+    api.patch(`pets/${petId}`,{
       name : nome,
       species : especie,
       sex : sexo,
@@ -32,7 +55,7 @@ function Register() {
       details: detalhes,
       city: cidade,
       state: estado,
-      status: status2,
+      status: status,
       active: true,
       token : token,
 
@@ -44,6 +67,7 @@ function Register() {
       }, 1000);
     }).catch((err) => {
       console.error("ops! ocorreu um erro" + err);
+      alert("ops! ocorreu um erro" + err)
     });
   }
 
@@ -66,7 +90,7 @@ function Register() {
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          HandleRegister();
+          HandleEdit();
       }}>
           <TextField value={nome}
           onChange={(event) => {
@@ -186,9 +210,9 @@ function Register() {
             <InputLabel>Status</InputLabel>
             <Select
             label="Status"
-            value={status2}
+            value={status}
             onChange={(event: React.ChangeEvent<{ value: unknown }>) => {
-              setStatus2(event.target.value as string);
+              setStatus(event.target.value as string);
             }}
             >
             <MenuItem value={"found"}>Perdido</MenuItem>
@@ -204,11 +228,11 @@ function Register() {
             variant="outlined" margin="normal"/>
           <Button type="submit" variant="contained" color="primary"
           fullWidth>
-              Finalizar Cadastro
+              Salvar alterações
           </Button>
       </form>
     </Container>
 )
 }
 
-export default Register;
+export default Edit;
