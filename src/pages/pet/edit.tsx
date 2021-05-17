@@ -2,7 +2,7 @@ import { Button, TextField, Container, Select, MenuItem, FormControl, InputLabel
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import api from '../../services/api';
-import { getUserToken } from '../../services/token';
+import { getUserID, getUserToken } from '../../services/token';
 import { useParams } from "react-router";
 import {cachorro,gato} from '../../services/racas';
 // import { Container } from './styles';
@@ -20,13 +20,15 @@ function Edit() {
   const [cidade, setCidade] = useState("");
   const [status, setStatus] = useState("");
   const [token, setToken] = useState("");
+  const [petuser, setPetuser] = useState("");
+  const [finishedrequest, setFinishedrequest] = useState(false);
   let history = useHistory();
   const [racaSelect,setRacaSelect]=useState(cachorro) as any;
 
   async function getPets() {
     api.get(`pets/${petId}`).then((res) => {
       const pets = res.data;
-      console.log(pets);
+      //console.log(pets);
       setNome(pets.name);
       setEspecie(pets.species);
       setSexo(pets.sex);
@@ -38,12 +40,24 @@ function Edit() {
       setEstado(pets.state);
       setCidade(pets.city);
       setStatus(pets.status);
+      setPetuser(pets.user_id);
+      setFinishedrequest(true);
     });
+
   }
   useEffect(() => {
     getPets();
-  }, []);
 
+  }, []);
+  useEffect(() => {
+    //Validação se o pet foi criado por você mesmo
+    let userid;
+    userid = getUserID();
+    console.log(userid,parseInt(petuser))
+    if(userid != parseInt(petuser) && isNaN(parseInt(petuser)) == false ){
+      history.push("/");
+    }
+  }, [petuser]);
   const HandleEdit = () => {
     api.patch(`pets/${petId}`,{
       name : nome,
