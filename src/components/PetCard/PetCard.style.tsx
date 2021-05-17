@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const PetCardStyle = makeStyles(() => ({
     PetCard:{
         overflow: "hidden",
-        width:"45%",
+        width:"calc(33% - 2rem)",
         margin:"1rem"
     },
     PetCardA: {

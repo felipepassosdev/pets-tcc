@@ -8,7 +8,9 @@ import {
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import api from "../../services/api";
+import { getUserID, getUserInfo } from "../../services/token";
 import { PetDetails } from "./details.style";
 export default function Details() {
   const [nome, setNome] = useState("");
@@ -21,12 +23,14 @@ export default function Details() {
   const [estado, setEstado] = useState("");
   const [cidade, setCidade] = useState("");
   const [status, setStatus] = useState("");
-  let { petId } = useParams<Record<string, string>>();
+  const [petuser, setPetuser] = useState("");
+  const [createbythisuser, setCreatebythisuser] = useState(false);
+  let { petSpecies,petName,petId } = useParams<Record<string, string>>();
   const { ImagePet, Tag } = PetDetails();
   async function getPets() {
     api.get(`pets/${petId}`).then((res) => {
       const pets = res.data;
-      console.log(pets);
+      //console.log(pets);
       setNome(pets.name);
       setEspecie(pets.species);
       setSexo(pets.sex);
@@ -38,11 +42,21 @@ export default function Details() {
       setEstado(pets.state);
       setCidade(pets.city);
       setStatus(pets.status);
+      setPetuser(pets.user_id);
     });
   }
   useEffect(() => {
     getPets();
   }, []);
+  useEffect(() => {
+    let userid;
+    userid = getUserID();
+    if(userid == parseInt(petuser)){
+      console.log("USER ID IGUAL!",userid);
+      setCreatebythisuser(true);
+    }
+  }, [petuser]);
+  let buttonEdit = <Button><Link to={`./${petSpecies+"&"+petName+"&"+petId}/edit`}>Editar esse pet</Link></Button>;
 
   return (
     <Container>
@@ -69,10 +83,13 @@ export default function Details() {
             <Typography className={Tag} variant="subtitle1">
               {cor}
             </Typography>
+            {createbythisuser && buttonEdit}
+            
             <Typography variant="h6">{detalhes}</Typography>
             <Typography variant="subtitle1">{estado}</Typography>
             <Typography variant="subtitle1">{cidade}</Typography>
             <Typography variant="subtitle1">{status}</Typography>
+            
           </Box>
         </Grid>
       </Grid>
