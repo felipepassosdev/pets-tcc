@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {setUserToken} from '../../services/token'
+import {setUserInfo, setUserToken} from '../../services/token'
 import {
   Button,
   Container,
@@ -21,8 +21,8 @@ function Login() {
       email : email,
       password: password,
     }).then((res)=>{
-      //console.log(res.data); // Token
-      setUserToken(res.data);
+      setUserToken(res.data.token);
+      setUserInfo(res.data.user);
       history.push("/");
       window.location.reload(false);
     }).catch((err) => {
