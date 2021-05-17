@@ -5,6 +5,7 @@ import api from '../../services/api';
 import { getUserID, getUserToken } from '../../services/token';
 import { useParams } from "react-router";
 import {cachorro,gato} from '../../services/racas';
+import Protectedpage from '../../services/protectedpage';
 // import { Container } from './styles';
 
 function Edit() {
@@ -47,7 +48,8 @@ function Edit() {
   }
   useEffect(() => {
     getPets();
-
+    let userValid = Protectedpage();
+    if(userValid == false){history.push("/login");}
   }, []);
   useEffect(() => {
     //Validação se o pet foi criado por você mesmo

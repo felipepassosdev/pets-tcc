@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import './services/reset.css';
 import Home from './pages/Home';
 import Login from './pages/user/login';
 import Register from './pages/user/register';

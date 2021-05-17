@@ -4,6 +4,7 @@ import { useHistory } from 'react-router';
 import api from '../../services/api';
 import { getUserToken } from '../../services/token';
 import {cachorro,gato} from '../../services/racas';
+import Protectedpage from '../../services/protectedpage';
 
 // import { Container } from './styles';
 
@@ -49,6 +50,8 @@ function Register() {
 
   useEffect(() => {
     let tokenResponse = getUserToken();
+    let userValid = Protectedpage();
+    if(userValid == false){history.push("/login");}
     setToken(tokenResponse);
   }, [])
 
