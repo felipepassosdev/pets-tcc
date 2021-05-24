@@ -12,6 +12,7 @@ import {
 import { useHistory } from "react-router";
 import api from "../../services/api";
 import { setUserToken } from "../../services/token";
+import Errorwarning from "../../components/Error/Errorwarning";
 
 function Register() {
   const [nome, setNome] = useState("");
@@ -19,6 +20,7 @@ function Register() {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [termos, setTermos] = useState(false);
+  const [error, setError] = useState("");
   let history = useHistory();
   const HandleRegister = () => {
     api.post('/users/signup',{
@@ -31,6 +33,7 @@ function Register() {
       history.push("/");
     }).catch((err) => {
       console.error("ops! ocorreu um erro" + err);
+      setError("ops! ocorreu um erro" + err);
     });
   }
   return (
@@ -126,6 +129,7 @@ function Register() {
             <Button type="submit" variant="contained" color="primary" fullWidth>
               Finalizar Cadastro
             </Button>
+            {error != "" && <Errorwarning message={error}></Errorwarning>}
           </form>
         </Grid>
       </Grid>

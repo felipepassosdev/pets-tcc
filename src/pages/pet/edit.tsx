@@ -6,6 +6,7 @@ import { getUserID, getUserToken } from '../../services/token';
 import { useParams } from "react-router";
 import {cachorro,gato} from '../../services/racas';
 import Protectedpage from '../../services/protectedpage';
+import Errorwarning from '../../components/Error/Errorwarning';
 // import { Container } from './styles';
 
 function Edit() {
@@ -22,6 +23,7 @@ function Edit() {
   const [status, setStatus] = useState("");
   const [token, setToken] = useState("");
   const [petuser, setPetuser] = useState("");
+  const [error, setError] = useState("");
   const [finishedrequest, setFinishedrequest] = useState(false);
   let history = useHistory();
   const [racaSelect,setRacaSelect]=useState(cachorro) as any;
@@ -77,13 +79,14 @@ function Edit() {
 
     }).then((res)=>{
       //console.log(res.data); // Token
-      alert(`Pet ${nome} criado com sucesso`);
+      alert(`Pet ${nome} Editado com sucesso`);
       setTimeout(() => {
         history.push("/");
       }, 1000);
     }).catch((err) => {
       console.error("ops! ocorreu um erro" + err);
-      alert("ops! ocorreu um erro" + err)
+      // alert("ops! ocorreu um erro" + err)
+      setError("ops! ocorreu um erro" + err);
     });
   }
 
@@ -103,6 +106,7 @@ function Edit() {
 
   return (
     <Container>
+      {error != "" && <Errorwarning message={error}></Errorwarning>}
       <form
         onSubmit={(event) => {
           event.preventDefault();
@@ -236,12 +240,6 @@ function Edit() {
             </Select>
           </FormControl>
 
-
-          <TextField value={token}
-          onChange={(event) => {
-            setToken(event.target.value);
-          }} id="Token" label="Token" type="text" 
-            variant="outlined" margin="normal"/>
           <Button type="submit" variant="contained" color="primary"
           fullWidth>
               Salvar alterações

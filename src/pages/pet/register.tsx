@@ -5,6 +5,7 @@ import api from '../../services/api';
 import { getUserToken } from '../../services/token';
 import {cachorro,gato} from '../../services/racas';
 import Protectedpage from '../../services/protectedpage';
+import Errorwarning from "../../components/Error/Errorwarning";
 
 // import { Container } from './styles';
 
@@ -20,6 +21,7 @@ function Register() {
   const [cidade, setCidade] = useState("");
   const [status2, setStatus2] = useState("");
   const [token, setToken] = useState("");
+  const [error, setError] = useState("");
   const [racaSelect,setRacaSelect]=useState([]) as any;
   let history = useHistory();
   const HandleRegister = () => {
@@ -45,6 +47,7 @@ function Register() {
       }, 1000);
     }).catch((err) => {
       console.error("ops! ocorreu um erro" + err);
+      setError("ops! ocorreu um erro" + err);
     });
   }
 
@@ -66,6 +69,7 @@ function Register() {
 
   return (
     <Container>
+       {error != "" && <Errorwarning message={error}></Errorwarning>}
       <form
         onSubmit={(event) => {
           event.preventDefault();
@@ -198,17 +202,11 @@ function Register() {
             <MenuItem value={"lost"}>Encontrado</MenuItem>
             </Select>
           </FormControl>
-
-
-          <TextField value={token}
-          onChange={(event) => {
-            setToken(event.target.value);
-          }} id="Token" label="Token" type="text" 
-            variant="outlined" margin="normal"/>
           <Button type="submit" variant="contained" color="primary"
           fullWidth>
               Finalizar Cadastro
           </Button>
+         
       </form>
     </Container>
 )

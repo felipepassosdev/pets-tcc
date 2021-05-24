@@ -10,11 +10,13 @@ import {
 } from "@material-ui/core";
 import { useHistory } from "react-router";
 import api from "../../services/api";
+import Errorwarning from "../../components/Error/Errorwarning";
 
 function Login() {
   let history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const HandleLogin= () => {
 
     api.post('/users/login',{
@@ -27,6 +29,7 @@ function Login() {
       window.location.reload(false);
     }).catch((err) => {
       console.error("ops! ocorreu um erro" + err);
+      setError("ops! ocorreu um erro" + err);
     });
   }
   return (
@@ -36,7 +39,6 @@ function Login() {
           <Box mt={2}>
             <Typography variant="h5">Bem-vindo de volta</Typography>
           </Box>
-
           <form
             onSubmit={(event) => {
               event.preventDefault();
@@ -73,6 +75,7 @@ function Login() {
             <Button type="submit" variant="contained" color="primary" fullWidth>
               Fazer Login
             </Button>
+            {error != "" && <Errorwarning message={error}></Errorwarning>}
           </form>
         </Grid>
         <Grid item xs={12} sm={6}>
