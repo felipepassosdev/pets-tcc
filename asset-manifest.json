@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/pets-tcc/static/css/main.f6335e08.chunk.css",
-    "main.js": "/pets-tcc/static/js/main.230adfbe.chunk.js",
-    "main.js.map": "/pets-tcc/static/js/main.230adfbe.chunk.js.map",
+    "main.js": "/pets-tcc/static/js/main.eefa152b.chunk.js",
+    "main.js.map": "/pets-tcc/static/js/main.eefa152b.chunk.js.map",
     "runtime-main.js": "/pets-tcc/static/js/runtime-main.1bd38ba8.js",
     "runtime-main.js.map": "/pets-tcc/static/js/runtime-main.1bd38ba8.js.map",
-    "static/js/2.6858688f.chunk.js": "/pets-tcc/static/js/2.6858688f.chunk.js",
-    "static/js/2.6858688f.chunk.js.map": "/pets-tcc/static/js/2.6858688f.chunk.js.map",
+    "static/js/2.377b47d4.chunk.js": "/pets-tcc/static/js/2.377b47d4.chunk.js",
+    "static/js/2.377b47d4.chunk.js.map": "/pets-tcc/static/js/2.377b47d4.chunk.js.map",
     "index.html": "/pets-tcc/index.html",
     "static/css/main.f6335e08.chunk.css.map": "/pets-tcc/static/css/main.f6335e08.chunk.css.map",
-    "static/js/2.6858688f.chunk.js.LICENSE.txt": "/pets-tcc/static/js/2.6858688f.chunk.js.LICENSE.txt"
+    "static/js/2.377b47d4.chunk.js.LICENSE.txt": "/pets-tcc/static/js/2.377b47d4.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.1bd38ba8.js",
-    "static/js/2.6858688f.chunk.js",
+    "static/js/2.377b47d4.chunk.js",
     "static/css/main.f6335e08.chunk.css",
-    "static/js/main.230adfbe.chunk.js"
+    "static/js/main.eefa152b.chunk.js"
   ]
 }
